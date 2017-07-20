@@ -1,0 +1,117 @@
+@import "../../../../styles";
+@mixin position {
+    content:'';
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 8px;
+    top: 9px;
+}
+.navigation {
+    width: 180px;
+    padding-top: 40px;
+    background: $top-menu-background;
+    height: 100%;
+    float: left;
+    position: relative;
+
+}
+.navigation > li {
+    cursor: pointer;
+    height: auto;
+    line-height: 40px;
+    text-align: center;
+    position: relative;
+    &:hover {
+        background: #5C606D;
+    }
+    > span {
+        width: 160px;
+        display: block;
+        height: 40px;
+        color: #787D86;
+        position: relative;
+        box-sizing: border-box;
+        padding: 0 30px;
+        padding-right: 10px;
+    }
+    > ul {
+        height: 0;
+        overflow: hidden;
+        transition: all 0.4s ;
+        a {
+            display: block;
+            height: 100%;
+        }
+    }
+    > i {
+        border: 1px solid #fff {
+            left: none;
+            bottom: none;
+        }
+        transition: all 0.4s;
+        float: right;
+        transform:rotate(45deg);
+        height: 5px;
+        width: 5px;
+        margin: 17px 20px 0 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+.navigation > li > span {
+   &:hover{
+       color:#fff; 
+    }
+    
+}
+.navigation > li > ul > li {
+    background: $color-second-menu;
+    &:hover {
+        background: #5C606D;
+    }
+}
+.navigation > li > ul > li> a {
+    color: #787D86;
+}
+.navigation > li > ul > li> a:hover {
+    color: #fff;
+}
+.navigation > li > ul > li.cur_click {
+    background: $second-menu-hover;
+}
+.navigation > li > ul > li.cur_click>a{
+    color: #fff;
+}
+.navigation > li.click {
+    background: $color-blue;
+}
+.navigation > li.click> span {
+    color:#fff;
+}
+.navigation > li > i.star {
+    transform: rotate(135deg)
+}
+
+/*.navigation>li:nth-child(1)>span::before{
+    @include position;
+    background: url('/assets/icon/nav1.png') no-repeat -27px 1px;
+}
+.navigation>li:nth-child(2)>span::before{
+    @include position;
+    background: url('/assets/icon/nav1.png') no-repeat -87px 1px;
+}
+.navigation>li:nth-child(3)>span::before{
+    @include position;
+    background: url('/assets/icon/nav1.png') no-repeat -118px 1px;
+}
+.navigation>li:nth-child(4)>span::before{
+    @include position;
+    background: url('/assets/icon/nav1.png') no-repeat -147px 1px;
+}
+.navigation>li:nth-child(5)>span::before{
+    @include position;
+    background: url(/assets/icon/permission-sys-icon.png) no-repeat 50%;
+}*/
+

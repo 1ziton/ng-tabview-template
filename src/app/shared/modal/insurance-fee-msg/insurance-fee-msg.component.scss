@@ -1,0 +1,24 @@
+@import "../../../../styles";
+.pop-modal-container{
+  @include center(280px);
+}
+.pop-modal-body ul{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    line-height: 30px;
+     li{
+        float: left;
+        span{
+            display: inline-block;
+            width: 80px;
+        }
+        input{
+            vertical-align:middle;
+            height: 25px;
+            margin-left:10px;
+            border: 1px solid #EBEEEE;
+; 
+        }
+    }
+}

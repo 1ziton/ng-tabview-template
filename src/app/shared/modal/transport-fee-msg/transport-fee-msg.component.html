@@ -1,0 +1,65 @@
+<div class="pop-modal-container">
+  <div class="pop-modal-header">
+    <span class="pop-modal-title">新增</span>
+    <span class="close-icon" (click)="close()">X</span>
+  </div>
+  <div class="pop-modal-body">
+    <p>干线资料</p>
+    <ul>
+      <li>
+        <span><em class="require-star">* </em><span>始发网点</span></span>
+        <div>
+          <department-select name="billingOrg" width="150px" [(ngModel)]="transportFeeMsgVo.billingOrg"></department-select>
+        </div>
+      </li>
+      <li>
+        <span><em class="require-star">* </em><span>目的省市区</span></span>
+        <div class="po-relative">
+          <area-select name="area" width="139px" height="15px" [(ngModel)]="transportFeeMsgVo.areaCode"></area-select>
+        </div>
+      </li>
+      <li>
+        <span>中转城市</span>
+        <div>
+          <input name="middleCity" [(ngModel)]="transportFeeMsgVo.middleCity" type="text">
+        </div>
+      </li>
+      <li>
+        <span>所属区域</span>
+        <div>
+          <input name="belongTo" [(ngModel)]="transportFeeMsgVo.belongTo" type="text">
+        </div>
+      </li>
+      <li>
+        <span>提货电话</span>
+        <div>
+          <input name="phone" [(ngModel)]="transportFeeMsgVo.phone" type="text">
+        </div>
+      </li>
+      <li>
+        <span>提货地址</span>
+        <div>
+          <input name="address" [(ngModel)]="transportFeeMsgVo.address" type="text">
+        </div>
+      </li>
+      <li>
+        <span>预约用时</span>
+        <div>
+          <input name="time" [(ngModel)]="transportFeeMsgVo.time" type="text">
+        </div>
+      </li>
+    </ul>
+    <p>家具类</p>
+    <ul>
+      <li class="home-type">
+        <span><em class="require-star">* </em><span>始发网点</span></span>
+        <input type="text">
+      </li>
+    </ul>
+    <p>建材类</p>
+  </div>
+  <div class="pop-modal-footer">
+    <button class="btn-primary" (click)="save()">确定</button>
+    <button class="btn-default" (click)="close()">取消</button>
+  </div>
+</div>

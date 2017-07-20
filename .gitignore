@@ -3,10 +3,8 @@
 # compiled output
 /dist
 /src/app/components
-/src/app/modules
-/src/app/shared
+/src/app/shared/lib
 /src/config
-/src/app/app.config.ts
 /tmp
 /out-tsc
 

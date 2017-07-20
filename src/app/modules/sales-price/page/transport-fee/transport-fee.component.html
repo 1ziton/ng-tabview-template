@@ -1,0 +1,144 @@
+<div class="header-padding">
+  <panel-nav [navs]="navs" [curIndex]="curIndex" (chanCurIndex)="changeNav($event)"></panel-nav>
+  <div class="search-input">
+    <form>
+      <ul class="grid-search-top">
+        <li class="col-mlg-4 col-lg-5 col-lg-6 col-sm-3">
+          <span>始发网点</span>
+          <div>
+            <department-select name="billingOrg" width="150px" [(ngModel)]="transportFeeVo.billingOrg"></department-select>
+          </div>
+        </li>
+        <li class="col-mlg-4 col-lg-5 col-lg-6 col-sm-3">
+          <span>目的省市区</span>
+          <div class="po-relative">
+            <area-select name="area" width="139px" [(ngModel)]="transportFeeVo.areaCode"></area-select>
+          </div>
+        </li>
+        <li class="btn-search">
+          <button class="btn-primary" (click)="doSearch()">查询</button>
+          <button class="btn-default" type="reset">清空</button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="table table-padding">
+    <div class="show-flow-chart">
+      <ul class="show-flow-list">
+        <li><span><i>信息列表</i></span></li>
+        <li (click)="showWin('add')"><span><i class="view-detail-btn"></i>新增</span></li>
+        <li (click)="showWin('change')"><span><i class="add-track-btn"></i>修改</span></li>
+        <li (click)="delete()"><span><i class="print-list-btn"></i>删除</span></li>
+        <li (click)="batchImport()"><span><i class="print-list-btn"></i>批量导入</span></li>
+        <li (click)="downTemplate()"><span><i class="print-list-btn"></i>下载模板</span></li>
+        <li (click)="dt.exportCSV()"><span><i class="print-list-btn"></i>导出</span></li>
+      </ul>
+    </div>
+    <!--标准运费-->
+    <p-dataTable selectionMode="single" #dt
+                 emptyMessage="没有记录"
+                 [value]="standardData.content"
+                 (onRowSelect)="onRowSelect($event)"
+                 [rows]="10"
+                 [paginator]="true"
+                 [pageLinks]="3"
+                 [rowsPerPageOptions]="[5,10,20]"
+                 scrollable="true"
+                 scrollWidth="100%"
+                 [(selection)]="selectionRow"
+                 [lazy]="true"
+                 (onLazyLoad)="load($event)" *ngIf="curIndex === 0">
+        <!--<p-header>
+            <div class="ui-helper-clearfix">
+                <button type="button" pButton icon="fa-file-o" iconPos="left" label="导出"
+                        (click)="dt.exportCSV()" style="float:right"></button>
+            </div>
+        </p-header>-->
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column [style]="{'width':'28px'}" rowspan="2"></p-column>
+                <p-column [style]="{'width': '100px'}" header="始发网点" rowspan="2"></p-column>
+                <p-column [style]="{'width': '120px'}" header="目的省市区" rowspan="2"></p-column>
+                <p-column [style]="{'width': '80px'}" header="预计用时" rowspan="2"></p-column>
+                <p-column [style]="{'width': '80px'}" header="中转城市" rowspan="2"></p-column>
+                <p-column [style]="{'width': '80px'}" header="所属区域" rowspan="2"></p-column>
+                <p-column [style]="{'width': '80px'}" header="提货电话" rowspan="2"></p-column>
+                <p-column [style]="{'width': '120px'}" header="提货地址" rowspan="2"></p-column>
+                <p-column [style]="{'width': '240px'}" header="家具类" colspan="3"></p-column>
+                <p-column [style]="{'width': '160px'}" header="建材类" colspan="2"></p-column>
+
+            </p-row>
+            <p-row>
+                <p-column header="软式定价(/m3)"></p-column>
+                <p-column header="板式定价(/m3)"></p-column>
+                <p-column header="最低一票"></p-column>
+                <p-column header="大理石定价(/件)"></p-column>
+                <p-column header="最低一件"></p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column [style]="{'width':'28px','text-align':'center'}" selectionMode="single"></p-column>
+        <p-column [style]="{'width': '100px','text-align':'center'}" field="billingOrg"></p-column>
+        <p-column [style]="{'width': '120px','text-align':'center'}" field="city"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="time"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="middleCity"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="belongArea"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="phone"></p-column>
+        <p-column [style]="{'width': '120px','text-align':'center'}" field="address"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="one"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="two"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="three"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="four"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="five"></p-column>
+    </p-dataTable>
+    <!--客户协议价-->
+    <p-dataTable selectionMode="single" #dt
+                 emptyMessage="没有记录"
+                 [value]="protocolData.content"
+                 (onRowSelect)="onRowSelect($event)"
+                 [rows]="10"
+                 [paginator]="true"
+                 [pageLinks]="3"
+                 [rowsPerPageOptions]="[5,10,20]"
+                 scrollable="true"
+                 scrollWidth="100%"
+                 [(selection)]="selectionRow"
+                 [lazy]="true"
+                 (onLazyLoad)="load($event)" *ngIf="curIndex === 1">
+        <!--<p-header>
+            <div class="ui-helper-clearfix">
+                <button type="button" pButton icon="fa-file-o" iconPos="left" label="导出"
+                        (click)="dt.exportCSV()" style="float:right"></button>
+            </div>
+        </p-header>-->
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column [style]="{'width':'28px'}" rowspan="2"></p-column>
+                <p-column [style]="{'width': '100px'}" header="始发网点" rowspan="2"></p-column>
+                <p-column [style]="{'width': '120px'}" header="目的省市区" rowspan="2"></p-column>
+                <p-column [style]="{'width': '240px'}" header="家具类" colspan="3"></p-column>
+                <p-column [style]="{'width': '160px'}" header="建材类" colspan="2"></p-column>
+
+            </p-row>
+            <p-row>
+                <p-column header="软式定价(/m3)"></p-column>
+                <p-column header="板式定价(/m3)"></p-column>
+                <p-column header="最低一票"></p-column>
+                <p-column header="大理石定价(/件)"></p-column>
+                <p-column header="最低一件"></p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column [style]="{'width':'28px','text-align':'center'}" selectionMode="single"></p-column>
+        <p-column [style]="{'width': '100px','text-align':'center'}" field="billingOrg"></p-column>
+        <p-column [style]="{'width': '120px','text-align':'center'}" field="city"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="one"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="two"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="three"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="four"></p-column>
+        <p-column [style]="{'width': '80px','text-align':'center'}" field="five"></p-column>
+    </p-dataTable>
+  </div>
+  <!--新增弹窗-->
+  <transport-fee-msg *ngIf="showAddWin" (closeWin)="closeWin('add')"></transport-fee-msg>
+</div>

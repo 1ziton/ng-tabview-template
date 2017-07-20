@@ -1,0 +1,15 @@
+<ul class="navigation">
+    <li *ngFor="let data of menuData;let i = index" [class.click]="isTopMenuClick[i]">
+        <span (click)="showPanel($event, i, data.link)" class="second-menu">
+             {{data.name}}
+         </span>
+        <i [class.star]="isStarClick[i]" *ngIf="data.children"></i>
+        <ul>
+            <li *ngFor="let menu of data.children;let i = index" [class.cur_click]="isMenuClick[i]">
+                <a (click)="menuClick(i,menu)">
+                    {{menu.name}}
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

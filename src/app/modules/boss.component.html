@@ -1,0 +1,14 @@
+<div id="main-header">
+    <header-top [widthSpread]="widthSpread" (widthChange)="widthChange($event)" (gotoPerson)="navPerson($event)"
+                (headerHome)="headerHome($event)" (selectSubMenu)="changeSubMenu($event)"></header-top>
+    <app-navigation-menu *ngIf='select' [widthSpread]="widthSpread" [menuData]="priceData" (menuClickHandler)="menuClickHandler($event)"></app-navigation-menu>
+    <app-navigation-menu *ngIf='!select' [widthSpread]="widthSpread" [menuData]="financeData" (menuClickHandler)="menuClickHandler($event)"></app-navigation-menu>
+</div>
+<div id="main-con" [ngStyle]="setContentStyle()">
+    <!--tabview area-->
+    <div class="tab-view">
+        <ui-tabview #tabview [tabs]="tabs" [activeIndex]="tabActiveIndex" (tabClose)="handlerTabClose($event)"></ui-tabview>
+    </div>
+</div>
+<div id="mask" class="mask-layer"></div>
+

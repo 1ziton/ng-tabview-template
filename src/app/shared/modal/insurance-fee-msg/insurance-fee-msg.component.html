@@ -1,0 +1,20 @@
+<div class="pop-modal-container">
+  <div class="pop-modal-header">
+    <span class="pop-modal-title">新增</span>
+    <span class="close-icon" (click)="close()">X</span>
+  </div>
+  <div class="pop-modal-body">
+    <ul>
+      <li><span>保价费率(%)</span></li>
+      <li><input type="number" [(ngModel)]="offerRate" min="0" maxlength="3"/></li>
+    </ul>
+    <ul>
+      <li><span>最低一票(元)</span></li>
+      <li><input type="number"[(ngModel)]="lowestFee" min="0" maxlength="3"/></li>
+    </ul>
+  </div>
+  <div class="pop-modal-footer">
+    <button class="btn-primary" (click)="save()">确定</button>
+    <button class="btn-default" (click)="close()">取消</button>
+  </div>
+</div>

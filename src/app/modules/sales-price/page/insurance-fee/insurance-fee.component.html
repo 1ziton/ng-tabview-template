@@ -1,0 +1,33 @@
+<div class="header-padding">
+  <panel-nav [navs]="navs" [curIndex]="curIndex" (chanCurIndex)="chanCurIndex($event)"></panel-nav>
+  <ul *ngIf="curIndex === 0">
+    <li class="data-filter-btn">
+      <button ngClass="{{active[0]?'active':''}}" (click)="dataFilter('all',0)">保价费维护</button>
+      <button ngClass="{{active[1]?'active':''}}" (click)="dataFilter('waitAppoint',1)">特殊保价费设置</button>
+    </li>
+  </ul>
+  <div class="table-padding" *ngIf="curIndex === 0">
+    <div class="show-flow-chart">
+      <ul class="show-flow-list">
+        <li><span><i>信息列表</i></span></li>
+        <!--保价费维护按钮-->
+        <li (click)="showWin('addOffer')" *ngIf="curIndex === 0 && curIndexTwo === 0 && data.content.length === 0 "><span><i class="view-detail-btn"></i>新增</span></li>
+        <li (click)="showWin('maintenanceOffer')" *ngIf="curIndex === 0 && curIndexTwo === 0 && data.content.length !== 0"><span><i class="view-detail-btn"></i>维护保价费</span></li>
+        <!--特殊保价费设置按钮-->
+        <li (click)="showWin('add')" *ngIf="curIndex === 0 && curIndexTwo === 1"><span><i class="view-detail-btn" ></i>新增</span></li>
+        <li (click)="showWin('add')" *ngIf="curIndex === 0 && curIndexTwo === 1"><span><i class="add-track-btn"></i>修改</span></li>
+        <li (click)="printSignClick()" *ngIf="curIndex === 0 && curIndexTwo === 1"><span><i class="print-list-btn"></i>删除</span></li>
+      </ul>
+    </div>
+    <p-dataTable [value]="data.content" *ngIf="curIndex === 0 && curIndexTwo === 0" emptyMessage="没有记录">
+      <p-column *ngFor="let col of columnsOfferFee" [field]="col.field" [header]="col.header"></p-column>
+    </p-dataTable>
+    <ui-grid [columns]="columnsSpecialFee" [data]="data" (load)="load($event)" (rowSelect)="rowSelect($event)" (cellClick)="cellClick($event)"
+      [(selections)]="selections" (cellMouseEnter)="cellMouseEnter($event,op1,op2)" (cellMouseLeave)="cellMouseLeave($event,op1,op2)"
+      *ngIf="curIndex === 0 && curIndexTwo === 1"></ui-grid>
+  </div>
+  <!--保价费新增-->
+  <app-insurance-fee-msg *ngIf="showAddOffer" [offerMsg] ="data.content" (closeWin)="closeWin('addOffer')"></app-insurance-fee-msg>
+  <!--保价费维护-->
+  <app-insurance-fee-msg *ngIf="showMaintenanceOffer" [offerMsg] ="data.content" (closeWin)="closeWin('maintenanceOffer')"></app-insurance-fee-msg>
+</div>
